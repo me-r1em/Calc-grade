@@ -4,28 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Grade Calculator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Comic Neue', cursive;
             margin: 20px;
+            background-color: #f9f9f9;
+            color: #333;
         }
         .container {
             max-width: 600px;
             margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #75d1eb;
+        }
+        .subject h2 {
+            color: #75d1eb;
         }
         input[type="number"] {
             width: 100%;
             padding: 10px;
             margin: 5px 0;
             box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f0f8ff;
         }
         button {
             padding: 10px 20px;
             margin-top: 10px;
+            background-color: #75d1eb;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #75d1eb;
         }
         .result {
             margin-top: 20px;
             font-size: 1.2em;
+            text-align: center;
+        }
+        .result.success {
+            color: #4fdc4f;
+        }
+        .result.fail {
+            color: #f16861;
         }
     </style>
 </head>
@@ -132,7 +164,16 @@
             }
 
             const finalGrade = totalWeightedGrade / totalCoefficient;
-            document.getElementById('result').innerText = `Your final grade is: ${finalGrade.toFixed(2)}`;
+            const resultElement = document.getElementById('result');
+            resultElement.innerText = `Your final grade is: ${finalGrade.toFixed(2)}`;
+
+            if (finalGrade < 10) {
+                resultElement.className = 'result fail';
+                resultElement.innerText += '\nSorry, you failed :(';
+            } else {
+                resultElement.className = 'result success';
+                resultElement.innerText += '\nCongrats, good job ;) !';
+            }
         }
     </script>
 </body>
